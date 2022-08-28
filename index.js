@@ -85,7 +85,7 @@ function getWinnersByYear(array, cb1, cb2, cb3) {
     const years = cb2(array, cb1);
     return winners.map((team, index) => `In ${years[index]}, ${team} won the world cup!`)
 }
-console.log(getWinnersByYear(fifaData, getFinals, getYears, getWinners));
+//console.log(getWinnersByYear(fifaData, getFinals, getYears, getWinners));
 
 
 
@@ -103,9 +103,14 @@ Use the higher order function `getAverageGoals` to do the following:
  
 */
 
-function getAverageGoals(/* code here */) {
-    /* code here */
- }
+function getAverageGoals(cb1) {
+    const reducedArray = cb1.reduce((acc, value) => {
+        return acc + value['Home Team Goals'] + value['Away Team Goals'];
+    }, 0);
+    return (reducedArray / cb1.length).toFixed(2);
+};
+
+console.log(getAverageGoals(getFinals(fifaData)));
 
 
 
